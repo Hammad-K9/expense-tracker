@@ -1,13 +1,14 @@
 import React from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser, auth } from '@clerk/nextjs/server';
 import { UserButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 
 const Header = async () => {
   const user = await currentUser();
+  const u = auth();
 
   return (
     <div className="p-5 flex justify-between items-center border shadow-sm">
