@@ -2,7 +2,8 @@ import React from 'react';
 
 const Upgrades = () => {
   return (
-    <div>Expenses</div>
+    <div>Upgrades</div>
   )
-}
+};
+
  export default Upgrades;

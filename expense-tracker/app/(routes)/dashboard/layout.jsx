@@ -1,18 +1,23 @@
+"use client";
+
 import React from 'react';
 
-import Sidebar from '@/components/Sidebar';
+import Navbar from '@/components/Navbar';
 import DashboardHeader from '@/components/DashboardHeader';
+import useWindowSize from '@/hooks/useWindowSize';
 
 export default function DashboardLayout({ children }) {
+  const { width } = useWindowSize();
+
   return (
-    <>
-      <div className="fixed md:w-64 hidden md:block">
-        <Sidebar />
-      </div>
-      <div className="md:ml-64">
-        <DashboardHeader />
+    <div className="flex flex-col h-screen">
+      <DashboardHeader />
+      <div className="flex">
+        <div className={`${width >= 768 ? "w-64" : ""}`}>
+          <Navbar />
+        </div>
         {children}
       </div>
-    </>
-  )
+    </div>
+  );
 };
