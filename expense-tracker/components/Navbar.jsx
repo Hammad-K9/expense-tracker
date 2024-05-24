@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect } from 'react';
 import { Layout, PiggyBank, ReceiptText, ShieldCheck } from 'lucide-react';
@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 import useWindowSize from '@/hooks/useWindowSize';
 
-
 const Navbar = () => {
   const { width } = useWindowSize();
   const navbarItems = [
@@ -15,25 +14,25 @@ const Navbar = () => {
       id: 0,
       name: 'Dashboard',
       icon: Layout,
-      path: '/dashboard',
+      path: '/dashboard'
     },
     {
       id: 1,
       name: 'Budgets',
       icon: PiggyBank,
-      path: '/dashboard/budgets',
+      path: '/dashboard/budgets'
     },
     {
       id: 2,
       name: 'Expenses',
       icon: ReceiptText,
-      path: '/dashboard/expenses',
+      path: '/dashboard/expenses'
     },
     {
       id: 3,
       name: 'Upgrade',
       icon: ShieldCheck,
-      path: '/dashboard/upgrade',
+      path: '/dashboard/upgrade'
     }
   ];
 
@@ -42,12 +41,12 @@ const Navbar = () => {
   useEffect(() => {
     console.log(path);
   }, [path]);
-  
+
   return width >= 768 ? (
     <div className="flex flex-1 hidden md:block">
       <div className="mb-5">
         {navbarItems.map((menu) => (
-          <Link key={menu.path} href={menu.path}>
+          <Link key={menu.id} href={menu.path}>
             <h2
               className={`flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:bg-customGreen-100 mb-2 
               ${path === menu.path ? 'bg-customGreen-100' : ''}`}
@@ -63,12 +62,12 @@ const Navbar = () => {
     <div className="p-4 fixed bottom-0 left-0 right-0 md:hidden">
       <div className="flex justify-around">
         {navbarItems.map((menu) => (
-          <Link href={menu.path}>
+          <Link key={menu.id} href={menu.path}>
             <h2
               className={`flex flex-row justify-around gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:bg-customGreen-100 
               ${path === menu.path && 'bg-customGreen-100'}`}
             >
-              <menu.icon/>
+              <menu.icon />
             </h2>
           </Link>
         ))}

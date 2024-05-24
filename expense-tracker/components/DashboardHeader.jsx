@@ -8,13 +8,8 @@ const DashboardHeader = () => {
   return (
     <div className="p-5 shadow-sm flex justify-between">
       <div className="flex items-center justify-between">
-        <div className={`${width >= 768 ? "w-64" : "pr-5"}`}>
-          <Image
-            src={'/icon.png'}
-            alt='logo'
-            width={75}
-            height={75}
-          />
+        <div className={`${width >= 768 ? 'w-64' : 'pr-5'}`}>
+          <Image src="/icon.png" alt="logo" width={75} height={75} />
         </div>
         <div className="p-1">Search bar</div>
       </div>
@@ -25,4 +20,4 @@ const DashboardHeader = () => {
   );
 };
 
- export default DashboardHeader;
+export default DashboardHeader;

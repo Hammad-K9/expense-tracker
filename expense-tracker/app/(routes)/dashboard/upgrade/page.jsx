@@ -1,9 +1,5 @@
 import React from 'react';
 
-const Upgrades = () => {
-  return (
-    <div>Upgrades</div>
-  )
-};
+const Upgrades = () => <div>Upgrades</div>;
 
- export default Upgrades;
+export default Upgrades;

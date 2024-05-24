@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 
@@ -13,11 +13,11 @@ export default function DashboardLayout({ children }) {
     <div className="flex flex-col h-screen">
       <DashboardHeader />
       <div className="flex">
-        <div className={`${width >= 768 ? "w-64" : ""}`}>
+        <div className={`${width >= 768 ? 'w-64' : ''}`}>
           <Navbar />
         </div>
         {children}
       </div>
     </div>
   );
-};
+}

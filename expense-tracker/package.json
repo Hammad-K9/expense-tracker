@@ -10,17 +10,46 @@
     "db:push": "npx drizzle-kit push",
     "db:studio": "npx drizzle-kit studio"
   },
+  "eslintConfig": {
+    "extends": [
+      "wesbos"
+    ],
+    "rules": {
+      "no-console": 0,
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "endOfLine": "auto",
+          "tabWidth": 2,
+          "trailingComma": "none"
+        }
+      ],
+      "no-plusplus": "off",
+      "import/no-unresolved": 0,
+      "react/prop-types": 0,
+      "import/no-extraneous-dependencies": 0,
+      "global-require": 0,
+      "eslint-plugin-import/no-named-as-default": 0
+    }
+  },
   "dependencies": {
     "@clerk/nextjs": "^5.0.12",
     "@neondatabase/serverless": "^0.9.3",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.10",
+    "emoji-picker-react": "^4.9.3",
+    "eslint-config-wesbos": "^4.0.1",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
+    "next-themes": "^0.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
