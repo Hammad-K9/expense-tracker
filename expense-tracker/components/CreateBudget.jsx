@@ -5,13 +5,12 @@ import { PlusCircle } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
+import appService from '@/services/appService';
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -19,10 +18,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { db } from '@/utils/drizzledb';
-import { Budgets } from '@/utils/schema';
 
-export const CreateBudget = ({ open, handleClick }) => {
+export const CreateBudget = () => {
   const [emojiIcon, setEmojiIcon] = useState('🦋');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -32,22 +29,23 @@ export const CreateBudget = ({ open, handleClick }) => {
   const { user } = useUser();
 
   const onCreateBudget = async () => {
-    const result = await db
-      .insert(Budgets)
-      .values({
+    try {
+      const result = await appService.create('/api/budgets', {
         name,
         amount,
         icon: emojiIcon,
         createdBy: user?.primaryEmailAddress?.emailAddress
-      })
-      .returning({ insertedId: Budgets.id });
+      });
 
-    if (result) {
       toast('Successfully created');
+      console.log(result);
+    } catch (error) {
+      toast('Something went wrong');
+    } finally {
+      setOpenDialog(false);
+      setName('');
+      setAmount(0);
     }
-    setOpenDialog(false);
-    setName('');
-    setAmount(0);
   };
 
   return (
