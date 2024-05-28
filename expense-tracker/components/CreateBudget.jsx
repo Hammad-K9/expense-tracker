@@ -9,8 +9,10 @@ import appService from '@/services/appService';
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -22,7 +24,6 @@ import { Label } from '@/components/ui/label';
 export const CreateBudget = () => {
   const [emojiIcon, setEmojiIcon] = useState('🦋');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
   const [name, setName] = useState('');
   const [amount, setAmount] = useState(0);
 
@@ -30,7 +31,7 @@ export const CreateBudget = () => {
 
   const onCreateBudget = async () => {
     try {
-      const result = await appService.create('/api/budgets', {
+      const createdBudget = await appService.create('/api/budgets', {
         name,
         amount,
         icon: emojiIcon,
@@ -38,11 +39,10 @@ export const CreateBudget = () => {
       });
 
       toast('Successfully created');
-      console.log(result);
+      console.log(createdBudget);
     } catch (error) {
       toast('Something went wrong');
     } finally {
-      setOpenDialog(false);
       setName('');
       setAmount(0);
     }
@@ -50,13 +50,7 @@ export const CreateBudget = () => {
 
   return (
     <div>
-      <Dialog
-        open={openDialog}
-        onOpenChange={() => {
-          setOpenEmojiPicker(false);
-          setOpenDialog(true);
-        }}
-      >
+      <Dialog onOpenChange={() => setOpenEmojiPicker(false)}>
         <DialogTrigger>
           <div className="bg-slate-100 p-10 rounded-md flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-md">
             <h2>Create New Budget</h2>
@@ -93,9 +87,6 @@ export const CreateBudget = () => {
                   id="budget-name"
                   placeholder="Groceries"
                   onChange={(e) => setName(e.target.value)}
-                  onKeyDown={(e) =>
-                    e.key === 'Enter' && name && amount ? onCreateBudget() : ''
-                  }
                 />
               </div>
               <div className="mt-2">
@@ -107,11 +98,13 @@ export const CreateBudget = () => {
                   id="budget-amount"
                   placeholder="300.05"
                   onChange={(e) => setAmount(e.target.value)}
-                  onKeyDown={(e) =>
-                    e.key === 'Enter' && name && amount ? onCreateBudget() : ''
-                  }
+                  asChild
                 />
               </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
               <Button
                 disabled={!(name && amount)}
                 className="mt-5 w-full"
@@ -119,8 +112,8 @@ export const CreateBudget = () => {
               >
                 Create Budget
               </Button>
-            </DialogDescription>
-          </DialogHeader>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
