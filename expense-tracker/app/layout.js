@@ -15,8 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <Toaster />
-        <body className={outfit.className}>{children}</body>
+        <body className={outfit.className}>
+          <Toaster />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

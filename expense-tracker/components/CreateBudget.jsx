@@ -21,37 +21,38 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export const CreateBudget = () => {
+export const CreateBudget = ({ refresh }) => {
   const [emojiIcon, setEmojiIcon] = useState('🦋');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [allocatedAmount, setAllocatedAmount] = useState(0);
 
   const { user } = useUser();
 
   const onCreateBudget = async () => {
     try {
-      const createdBudget = await appService.create('/api/budgets', {
+      await appService.create('/api/budgets', {
         name,
-        amount,
+        allocatedAmount,
         icon: emojiIcon,
-        createdBy: user?.primaryEmailAddress?.emailAddress
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdAt: Date.now()
       });
 
+      refresh();
       toast('Successfully created');
-      console.log(createdBudget);
     } catch (error) {
       toast('Something went wrong');
     } finally {
       setName('');
-      setAmount(0);
+      setAllocatedAmount(0);
     }
   };
 
   return (
     <div>
       <Dialog onOpenChange={() => setOpenEmojiPicker(false)}>
-        <DialogTrigger>
+        <DialogTrigger className="w-full">
           <div className="bg-slate-100 p-10 rounded-md flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-md">
             <h2>Create New Budget</h2>
             <PlusCircle />
@@ -90,14 +91,14 @@ export const CreateBudget = () => {
                 />
               </div>
               <div className="mt-2">
-                <Label className="text-black" htmlFor="budget-amount">
+                <Label className="text-black" htmlFor="budget-allocated-amount">
                   Budget Amount
                 </Label>
                 <Input
                   type="number"
-                  id="budget-amount"
+                  id="budget-allocated-amount"
                   placeholder="300.05"
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) => setAllocatedAmount(e.target.value)}
                   asChild
                 />
               </div>
@@ -106,7 +107,7 @@ export const CreateBudget = () => {
           <DialogFooter>
             <DialogClose asChild>
               <Button
-                disabled={!(name && amount)}
+                disabled={!(name && allocatedAmount)}
                 className="mt-5 w-full"
                 onClick={onCreateBudget}
               >

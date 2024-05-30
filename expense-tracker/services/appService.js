@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-/* Gets all the projects or all the todos associated with the selected project
-depending on the baseUrl */
 const getAll = async (baseUrl) => {
   const response = await axios.get(baseUrl);
   return response.data;

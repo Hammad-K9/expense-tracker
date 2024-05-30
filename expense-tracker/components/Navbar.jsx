@@ -59,8 +59,8 @@ const Navbar = () => {
       </div>
     </div>
   ) : (
-    <div className="p-4 fixed bottom-0 left-0 right-0 md:hidden">
-      <div className="flex justify-around">
+    <div className="fixed bottom-0 left-0 right-0 md:hidden">
+      <div className="flex justify-around bg-slate-100 w-screen">
         {navbarItems.map((menu) => (
           <Link key={menu.id} href={menu.path}>
             <h2
