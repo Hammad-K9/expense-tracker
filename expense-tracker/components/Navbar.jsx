@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Layout, PiggyBank, ReceiptText, ShieldCheck } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -37,10 +37,6 @@ const Navbar = () => {
   ];
 
   const path = usePathname();
-
-  useEffect(() => {
-    console.log(path);
-  }, [path]);
 
   return width >= 768 ? (
     <div className="flex flex-1 hidden md:block">

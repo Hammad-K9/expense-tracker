@@ -1,4 +1,4 @@
-import { pgTable, varchar, text, numeric, integer } from 'drizzle-orm/pg-core';
+import { pgTable, varchar, text, numeric } from 'drizzle-orm/pg-core';
 import ShortUniqueId from 'short-unique-id';
 
 const uid = new ShortUniqueId({ length: 10 });
