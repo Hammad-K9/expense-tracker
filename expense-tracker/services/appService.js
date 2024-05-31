@@ -5,6 +5,11 @@ const getAll = async (baseUrl) => {
   return response.data;
 };
 
+const getBudgetInfo = async (baseUrl) => {
+  const response = await axios.get(baseUrl);
+  return response.data[0];
+};
+
 const create = async (baseUrl, newObject) => {
   const response = await axios.post(baseUrl, newObject);
   return response.data;
@@ -20,4 +25,4 @@ const deleteItem = async (baseUrl, id) => {
   return response.data;
 };
 
-export default { getAll, create, update, deleteItem };
+export default { getAll, getBudgetInfo, create, update, deleteItem };

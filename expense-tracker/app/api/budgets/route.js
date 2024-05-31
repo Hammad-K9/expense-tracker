@@ -54,7 +54,7 @@ export async function GET(req) {
     const budgetList = await db
       .select({
         ...getTableColumns(Budgets),
-        spent: sql`sum(${Expenses.allocatedAmount})`.mapWith(Number),
+        spent: sql`sum(${Expenses.amount})`.mapWith(Number),
         totalItems: sql`count(${Expenses.id})`.mapWith(Number)
       })
       .from(Budgets)

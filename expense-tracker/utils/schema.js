@@ -19,7 +19,7 @@ export const Expenses = pgTable('expenses', {
     .primaryKey()
     .$defaultFn(() => uid.rnd()),
   name: varchar('name').notNull(),
-  allocatedAmount: numeric('allocatedAmount').notNull(),
+  amount: numeric('amount').notNull(),
   budgetId: text('budgetId').references(() => Budgets.id),
   createdAt: varchar('createdAt').notNull()
 });

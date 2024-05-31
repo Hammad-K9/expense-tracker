@@ -25,7 +25,7 @@ export const CreateBudget = ({ refresh }) => {
   const [emojiIcon, setEmojiIcon] = useState('🦋');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [name, setName] = useState('');
-  const [allocatedAmount, setAllocatedAmount] = useState(0);
+  const [allocatedAmount, setAllocatedAmount] = useState('');
 
   const { user } = useUser();
 
@@ -40,12 +40,12 @@ export const CreateBudget = ({ refresh }) => {
       });
 
       refresh();
-      toast('Successfully created');
+      toast('Successfully created budget');
     } catch (error) {
       toast('Something went wrong');
     } finally {
       setName('');
-      setAllocatedAmount(0);
+      setAllocatedAmount('');
     }
   };
 
