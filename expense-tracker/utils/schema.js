@@ -11,7 +11,7 @@ export const Budgets = pgTable('budgets', {
   allocatedAmount: numeric('allocatedAmount').notNull(),
   icon: varchar('icon'),
   createdBy: varchar('createdBy').notNull(),
-  createdAt: numeric('createdAt').notNull()
+  createdAt: varchar('createdAt').notNull()
 });
 
 export const Expenses = pgTable('expenses', {

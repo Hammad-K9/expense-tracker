@@ -5,8 +5,8 @@ const getAll = async (baseUrl) => {
   return response.data;
 };
 
-const getBudgetInfo = async (baseUrl) => {
-  const response = await axios.get(baseUrl);
+const getBudgetInfo = async (baseUrl, budgetId) => {
+  const response = await axios.get(`${baseUrl}/${budgetId}`);
   return response.data[0];
 };
 

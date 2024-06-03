@@ -17,8 +17,6 @@ export async function GET(req, { params }) {
       (email) => email.id === user.primaryEmailAddressId
     );
 
-    const { id } = params;
-
     const budgetInfo = await db
       .select({
         ...getTableColumns(Budgets),
@@ -28,7 +26,7 @@ export async function GET(req, { params }) {
       .from(Budgets)
       .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
       .where(eq(Budgets.createdBy, emailAddress))
-      .where(eq(Budgets.id, id))
+      .where(eq(Budgets.id, params.id))
       .groupBy(Budgets.id);
 
     return NextResponse.json(budgetInfo);
