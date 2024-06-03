@@ -69,3 +69,31 @@ export async function GET(req) {
     return new NextResponse('Internal error', { status: 500 });
   }
 }
+
+export async function DELETE(req, { params }) {
+  try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const budgetId = params.id[0];
+
+    // Delete all expenses in a budget before deleting budget
+    await db
+      .delete(Expenses)
+      .where(eq(Expenses.budgetId, budgetId))
+      .returning();
+
+    const deletedBudget = await db
+      .delete(Budgets)
+      .where(eq(Budgets.id, budgetId))
+      .returning();
+
+    return NextResponse.json(deletedBudget);
+  } catch (error) {
+    console.log('[BUDGETS_DELETE]', error);
+    return new NextResponse('Internal error', { status: 500 });
+  }
+}

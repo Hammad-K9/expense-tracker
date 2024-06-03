@@ -4,16 +4,31 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
+import { Trash } from 'lucide-react';
 import appService from '@/services/appService';
 import BudgetItem from '@/components/BudgetItem';
 import AddExpense from '@/components/AddExpense';
 import ExpenseList from '@/components/ExpenseList';
+import { Button } from '@/components/ui/button';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog';
 
 const ExpensesPage = ({ params }) => {
   const { user } = useUser();
   const [budgetInfo, setBudgetInfo] = useState(null);
   const [expenseList, setExpenseList] = useState([]);
+  const route = useRouter();
 
   useEffect(() => {
     user && getBudgetInfo();
@@ -49,9 +64,56 @@ const ExpensesPage = ({ params }) => {
     }
   };
 
+  const deleteExpense = async (exp) => {
+    try {
+      await appService.deleteItem('/api/expenses', exp.id);
+      getBudgetInfo();
+      toast('Expense has been deleted');
+    } catch (error) {
+      toast('Error deleting expense');
+      console.log(error);
+    }
+  };
+
+  const deleteBudget = async () => {
+    try {
+      await appService.deleteItem('/api/budgets', params.budgetId);
+      toast('Budget has been deleted');
+      route.replace('/dashboard/budgets');
+    } catch (error) {
+      toast('Error deleting budget');
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full p-20 pt-10 md:p-10">
-      <h2 className="text-3xl font-bold">My Expenses</h2>
+      <div className="flex justify-between">
+        <h2 className="text-3xl font-bold">My Expenses</h2>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">
+              <Trash className="mr-2" /> Delete Budget
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                budget and expenses associated with this budget, and remove your
+                data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={() => deleteBudget()}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
       <div className="mt-7">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {budgetInfo ? (
@@ -69,7 +131,7 @@ const ExpensesPage = ({ params }) => {
           <h2>Expenses</h2>
           <ExpenseList
             expenseList={expenseList}
-            refresh={() => getBudgetInfo()}
+            deleteExpense={deleteExpense}
           />
         </div>
       </div>
