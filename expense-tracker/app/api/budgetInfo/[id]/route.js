@@ -35,3 +35,31 @@ export async function GET(req, { params }) {
     return new NextResponse('Internal error', { status: 500 });
   }
 }
+
+export async function PUT(req, { params }) {
+  try {
+    const user = await currentUser();
+
+    if (!user) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const { icon, name, allocatedAmount, createdAt } = await req.json();
+
+    const budgetInfo = await db
+      .update(Budgets)
+      .set({
+        name,
+        allocatedAmount,
+        icon,
+        createdAt
+      })
+      .where(eq(Budgets.id, params.id))
+      .returning();
+
+    return NextResponse.json(budgetInfo);
+  } catch (error) {
+    console.log('[BUDGETS_UPDATE_INFO]', error);
+    return new NextResponse('Internal error', { status: 500 });
+  }
+}

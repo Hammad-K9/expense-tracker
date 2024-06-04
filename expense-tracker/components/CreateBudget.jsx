@@ -85,6 +85,7 @@ export const CreateBudget = ({ refresh }) => {
                   Budget Name
                 </Label>
                 <Input
+                  className="text-black"
                   type="text"
                   id="budget-name"
                   placeholder="Groceries"
@@ -96,6 +97,7 @@ export const CreateBudget = ({ refresh }) => {
                   Budget Amount
                 </Label>
                 <Input
+                  className="text-black"
                   type="number"
                   id="budget-allocated-amount"
                   placeholder="300.05"
