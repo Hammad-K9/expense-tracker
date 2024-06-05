@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 
 import CardInfo from '@/components/CardInfo';
 import appService from '@/services/appService';
+import DashboardBarChart from '@/components/DashboardBarChart';
 
 const Dashboard = () => {
   const [budgetList, setBudgetList] = useState([]);
@@ -36,6 +37,12 @@ const Dashboard = () => {
       <h2 className="text-3xl font-bold">Hi, {user?.firstName}</h2>
       <p className="text-gray-500">Let's $track your Expenses!</p>
       <CardInfo budgetList={budgetList} />
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-7">
+        <div className="md:col-span-2">
+          <DashboardBarChart budgetList={budgetList} />
+        </div>
+        <div>Other Content</div>
+      </div>
     </div>
   );
 };
