@@ -24,7 +24,6 @@ const AddExpense = ({ user, budgetId, refresh }) => {
       setName('');
       setAmount('');
       refresh();
-      console.log(expense);
     } catch (error) {
       toast('Something went wrong');
     }

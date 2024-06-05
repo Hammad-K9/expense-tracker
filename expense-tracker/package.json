@@ -31,7 +31,8 @@
       "import/no-extraneous-dependencies": 0,
       "global-require": 0,
       "eslint-plugin-import/no-named-as-default": 0,
-      "react-hooks/rules-of-hooks": 0
+      "react-hooks/rules-of-hooks": 0,
+      "react/jsx-no-useless-fragment": 0
     }
   },
   "dependencies": {

@@ -11,7 +11,6 @@ const DashboardHeader = () => {
         <div className={`${width >= 768 ? 'w-64' : 'pr-5'}`}>
           <Image src="/icon.png" alt="logo" width={75} height={75} />
         </div>
-        <div className="p-1">Search bar</div>
       </div>
       <div className="flex items-center">
         <UserButton />
