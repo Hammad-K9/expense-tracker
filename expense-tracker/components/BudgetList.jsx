@@ -16,8 +16,8 @@ const BudgetList = () => {
 
   useEffect(() => {
     setBudgetListLoading(true);
-    user && getAllBudgets();
-  }, [user]);
+    getAllBudgets();
+  }, []);
 
   const getAllBudgets = async () => {
     try {
@@ -32,7 +32,7 @@ const BudgetList = () => {
 
   return (
     <div className="mt-7">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 w-full">
         <CreateBudget refresh={() => getAllBudgets()} />
         {budgetList.length > 0
           ? budgetList.map((b) => <BudgetItem key={b.id} budget={b} />)

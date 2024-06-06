@@ -26,21 +26,27 @@ export const CardInfo = ({ budgetList }) => {
           <div className="p-7 border rounded-lg flex justify-between items-center">
             <div>
               <h2 className="text-sm">Total Budget Amount</h2>
-              <h2 className="font-bold text-2xl">${totalBudgetAmount}</h2>
+              <h2 className="font-bold text-2xl">
+                ${Number(totalBudgetAmount).toLocaleString()}
+              </h2>
             </div>
             <PiggyBank className="bg-primary p-3 h-12 w-12 rounded-full" />
           </div>
           <div className="p-7 border rounded-lg flex justify-between items-center">
             <div>
               <h2 className="text-sm">Total Budget Spent</h2>
-              <h2 className="font-bold text-2xl">${totalBudgetSpent}</h2>
+              <h2 className="font-bold text-2xl">
+                ${Number(totalBudgetSpent).toLocaleString()}
+              </h2>
             </div>
             <Receipt className="bg-primary p-3 h-12 w-12 rounded-full" />
           </div>
           <div className="p-7 border rounded-lg flex justify-between items-center">
             <div>
               <h2 className="text-sm">No. Budgets</h2>
-              <h2 className="font-bold text-2xl">{budgetList?.length}</h2>
+              <h2 className="font-bold text-2xl">
+                {budgetList?.length.toLocaleString()}
+              </h2>
             </div>
             <Wallet className="bg-primary p-3 h-12 w-12 rounded-full" />
           </div>

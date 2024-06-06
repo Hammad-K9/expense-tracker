@@ -12,7 +12,7 @@ const AddExpense = ({ user, budgetId, refresh }) => {
 
   const addNewExpense = async () => {
     try {
-      const expense = await appService.create(`/api/expenses/${budgetId}`, {
+      await appService.create(`/api/expenses/${budgetId}`, {
         name,
         amount,
         budgetId,
@@ -30,7 +30,7 @@ const AddExpense = ({ user, budgetId, refresh }) => {
   };
 
   return (
-    <div className="p-5 border rounded-lg">
+    <div className="p-5 border rounded-lg min-w-[360px] md:min-w-screen">
       <h2 className="font-bold text-lg">Add Expense</h2>
       <div className="mt-2">
         <Label className="text-black" htmlFor="expense-name">

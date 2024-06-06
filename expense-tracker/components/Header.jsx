@@ -11,7 +11,7 @@ const Header = async () => {
 
   return (
     <div className="p-5 flex justify-between items-center border shadow-sm">
-      <Image src="/icon.png" alt="logo" width={75} height={75} />
+      <Image src="/icon.jpeg" alt="logo" width={75} height={75} />
       {user ? (
         <UserButton />
       ) : (

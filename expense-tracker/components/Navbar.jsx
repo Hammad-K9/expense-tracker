@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Layout, PiggyBank, ReceiptText, ShieldCheck } from 'lucide-react';
+import { Layout, PiggyBank, ReceiptText } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -27,19 +27,13 @@ const Navbar = () => {
       name: 'Expenses',
       icon: ReceiptText,
       path: '/dashboard/expenses'
-    },
-    {
-      id: 3,
-      name: 'Upgrade',
-      icon: ShieldCheck,
-      path: '/dashboard/upgrade'
     }
   ];
 
   const path = usePathname();
 
   return width >= 768 ? (
-    <div className="flex flex-1 hidden md:block">
+    <div className="flex flex-1 md:block">
       <div className="mb-5">
         {navbarItems.map((menu) => (
           <Link key={menu.id} href={menu.path}>
@@ -55,8 +49,8 @@ const Navbar = () => {
       </div>
     </div>
   ) : (
-    <div className="fixed bottom-0 left-0 right-0 md:hidden">
-      <div className="flex justify-around bg-slate-100 w-screen">
+    <div className="fixed bottom-0 left-0 right-0 z-10">
+      <div className="flex justify-around bg-slate-100 w-full">
         {navbarItems.map((menu) => (
           <Link key={menu.id} href={menu.path}>
             <h2

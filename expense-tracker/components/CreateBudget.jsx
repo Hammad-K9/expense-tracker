@@ -54,7 +54,7 @@ export const CreateBudget = ({ refresh }) => {
     <div>
       <Dialog onOpenChange={() => setOpenEmojiPicker(false)}>
         <DialogTrigger className="w-full">
-          <div className="bg-slate-100 p-10 rounded-md flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-md">
+          <div className="bg-slate-100 p-10 rounded-md flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-md min-w-[360px]">
             <h2>Create New Budget</h2>
             <PlusCircle />
           </div>
